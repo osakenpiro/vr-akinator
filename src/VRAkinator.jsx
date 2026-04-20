@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import VRHeader from './VRHeader'
 
 /* ═══ 20 Visualization Methods ═══ */
 const METHODS = [
@@ -163,37 +164,23 @@ export default function VRAkinator() {
       minHeight:'100vh',background:'#0b0f1a',color:'#e4e8f0',
       display:'flex',flexDirection:'column',
     }}>
-      {/* Header */}
-      <header style={{
-        padding:'12px 18px',borderBottom:'1px solid #1e2640',
-        display:'flex',alignItems:'center',gap:12,flexWrap:'wrap',
-      }}>
-        <div style={{fontSize:20,fontWeight:700}}>🧙 VR Akinator</div>
-        <div style={{fontSize:11,color:'#5a6378'}}>可視化の魔神 · 5問で最適なVRを占う</div>
-
-        {/* Progress */}
-        <div style={{flex:1,minWidth:120,height:4,background:'#111827',borderRadius:2,overflow:'hidden',margin:'0 12px'}}>
-          <div style={{
-            width:`${progress*100}%`,height:'100%',
-            background:'linear-gradient(90deg,#ffd166,#ef476f)',
-            transition:'width 0.4s',
-          }}/>
-        </div>
-        <span style={{fontSize:11,color:'#8892b0',minWidth:36}}>
-          {isResult ? '占結果' : `${step+1}/${totalSteps}`}
-        </span>
-
-        <div style={{display:'flex',gap:8,fontSize:10}}>
-          <a href="https://osakenpiro.github.io/wakkazukan/" target="_blank" rel="noreferrer"
-            style={{color:'#8892b0',textDecoration:'none'}}>🪐</a>
-          <a href="https://osakenpiro.github.io/banet-map/" target="_blank" rel="noreferrer"
-            style={{color:'#8892b0',textDecoration:'none'}}>🌀</a>
-          <a href="https://osakenpiro.github.io/tana-zukan/" target="_blank" rel="noreferrer"
-            style={{color:'#8892b0',textDecoration:'none'}}>📚</a>
-          <a href="https://osakenpiro.github.io/hyakumasu/" target="_blank" rel="noreferrer"
-            style={{color:'#8892b0',textDecoration:'none'}}>🔢</a>
-        </div>
-      </header>
+      <VRHeader
+        title={<span>🧙 VR Akinator <span style={{fontSize:11,color:'#5a6378',fontWeight:400,marginLeft:8}}>可視化の魔神 · 5問で最適なVRを占う</span></span>}
+        currentApp="akinator"
+        version="v0.2"
+        centerSlot={<>
+          <div style={{flex:1,minWidth:120,maxWidth:240,height:4,background:'#111827',borderRadius:2,overflow:'hidden',margin:'0 12px'}}>
+            <div style={{
+              width:`${progress*100}%`,height:'100%',
+              background:'linear-gradient(90deg,#ffd166,#ef476f)',
+              transition:'width 0.4s',
+            }}/>
+          </div>
+          <span style={{fontSize:11,color:'#8892b0',minWidth:36}}>
+            {isResult ? '占結果' : `${step+1}/${totalSteps}`}
+          </span>
+        </>}
+      />
 
       {/* Body */}
       <main style={{flex:1,padding:'24px 20px',maxWidth:720,margin:'0 auto',width:'100%'}}>
